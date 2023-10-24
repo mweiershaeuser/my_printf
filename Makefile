@@ -46,14 +46,17 @@ NAME	=	libmy.a
 
 TESTS	=	unit_tests
 
-.PHONY: all clean fclean re tests_run tests_run_cov
+.PHONY: all clean_emacs clean fclean re tests_run tests_run_cov
 
 all: $(NAME)
 
 $(NAME):	$(OBJ)
 	ar rc -o $(NAME) $(OBJ)
 
-clean:
+clean_emacs:
+	find . \( -name "*~" -or -name "#*#" \) -delete
+
+clean: clean_emacs
 	rm -f $(OBJ)
 
 fclean:		clean
