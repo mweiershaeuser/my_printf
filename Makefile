@@ -14,6 +14,7 @@ SRC	=	lib/my/helpers.c	\
 		lib/my/my_is_prime.c	\
 		lib/my/my_putchar.c	\
 		lib/my/my_put_nbr.c	\
+		lib/my/my_putfloat.c	\
 		lib/my/my_putstr.c	\
 		lib/my/my_revstr.c	\
 		lib/my/my_showmem.c	\
@@ -66,14 +67,16 @@ re: fclean all
 
 $(TESTS): re
 	mkdir -p coverage
-	cd coverage && gcc -o $(TESTS) ../tests/*.c -L ../ -lmy --coverage -lcriterion
+	cd coverage && \
+	gcc -o $(TESTS) ../tests/*.c -L ../ -lmy --coverage -lcriterion
 
 tests_run: $(TESTS)
 	cd coverage && ./$(TESTS)
 
 tests_run_cov:
 	mkdir -p coverage
-	cd coverage && gcc -o $(TESTS) ../*.c ../tests/*.c -L ../ -lmy --coverage -lcriterion
+	cd coverage && \
+	gcc -o $(TESTS) ../*.c ../tests/*.c -L ../ -lmy --coverage -lcriterion
 	cd coverage && ./$(TESTS)
 	gcovr --exclude tests
 	gcovr --exclude tests --branches

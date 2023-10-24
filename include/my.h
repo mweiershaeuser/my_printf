@@ -19,6 +19,7 @@ int my_isneg(int n);
 int my_is_prime(int nb);
 void my_putchar(char c);
 int my_put_nbr(int nb);
+int my_putfloat(double nb, int precision);
 int my_putstr(char const *str);
 char *my_revstr(char *str);
 int my_showmem(char const *str, int size);
