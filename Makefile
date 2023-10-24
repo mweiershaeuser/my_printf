@@ -38,12 +38,15 @@ SRC	=	lib/my/helpers.c	\
 		lib/my/my_str_to_word_array.c	\
 		lib/my/my_strupcase.c	\
 		lib/my/my_swap.c	\
+		my_printf.c
 
 OBJ	=	$(SRC:.c=.o)
 
 NAME	=	libmy.a
 
-.PHONY: all clean fclean re
+TESTS	=	unit_tests
+
+.PHONY: all clean fclean re tests_run tests_run_cov
 
 all: $(NAME)
 
@@ -51,9 +54,23 @@ $(NAME):	$(OBJ)
 	ar rc -o $(NAME) $(OBJ)
 
 clean:
-	rm -f $(OBJ) *~
+	rm -f $(OBJ)
 
 fclean:		clean
-	rm -f $(NAME)
+	rm -f $(NAME) $(TESTS)
 
 re: fclean all
+
+$(TESTS): re
+	mkdir -p coverage
+	cd coverage && gcc -o $(TESTS) ../tests/*.c -L ../ -lmy --coverage -lcriterion
+
+tests_run: $(TESTS)
+	cd coverage && ./$(TESTS)
+
+tests_run_cov:
+	mkdir -p coverage
+	cd coverage && gcc -o $(TESTS) ../*.c ../tests/*.c -L ../ -lmy --coverage -lcriterion
+	cd coverage && ./$(TESTS)
+	gcovr --exclude tests
+	gcovr --exclude tests --branches
