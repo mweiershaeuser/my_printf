@@ -1,0 +1,13 @@
+**/*.out
+**/*.o
+**/*.a
+
+**/*~
+**/#*#
+**/.#*
+
+coding-style-reports.log
+
+**/unit_tests
+**/*.gcda
+**/*.gcno
