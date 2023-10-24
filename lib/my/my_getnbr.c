@@ -4,7 +4,7 @@
 ** File description:
 ** Returns a number, sent to the function as a string
 */
-#include "my.h"
+#include "../../include/my.h"
 
 static int validate(char c, char *nbr, int *len)
 {
