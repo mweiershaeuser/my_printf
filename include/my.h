@@ -44,4 +44,5 @@ void my_swap(int *a , int *b);
 int my_show_word_array(char *const *tab);
 char **my_str_to_word_array(char const *str);
 
+int my_printf(const char *format, ...);
 #endif

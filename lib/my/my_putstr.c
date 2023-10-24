@@ -9,14 +9,10 @@
 int my_putstr(char const *str)
 {
     int i = 0;
-    char c;
 
-    do {
-        c = str[i];
-        if (c != '\0') {
-            my_putchar(c);
-        }
-        i ++;
-    } while (c != '\0');
-    return 0;
+    while (str[i] != '\0') {
+        my_putchar(str[i]);
+        i++;
+    }
+    return i;
 }
