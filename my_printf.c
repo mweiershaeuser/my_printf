@@ -7,20 +7,20 @@
 #include <stdarg.h>
 #include "include/my.h"
 
-static int get_format(const char *format, va_list args)
+static int get_format(const char *format, va_list *args)
 {
     switch (*format) {
     case '%':
         my_putchar('%');
         return 1;
     case 'd':
-        return my_put_nbr(va_arg(args, int));
+        return my_put_nbr(va_arg(*args, int));
     case 'i':
-        return my_put_nbr(va_arg(args, int));
+        return my_put_nbr(va_arg(*args, int));
     case 's':
-        return my_putstr(va_arg(args, char *));
+        return my_putstr(va_arg(*args, char *));
     case 'c':
-        my_putchar(va_arg(args, int));
+        my_putchar(va_arg(*args, int));
         return 1;
     case '\0':
         return -1;
@@ -41,7 +41,7 @@ int my_printf(const char *format, ...)
     while (*format != '\0') {
         if (*format == '%') {
             format++;
-            res = get_format(format, args);
+            res = get_format(format, &args);
             cnt += res;
         } else {
             my_putchar(*format);
