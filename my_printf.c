@@ -31,7 +31,6 @@ int handle_percent(va_list *args)
     return 1;
 }
 
-
 static int get_format(const char *format, va_list *args)
 {
     for (int i = 0; i < FLAG_MAP_LENGTH; i++) {
@@ -39,7 +38,6 @@ static int get_format(const char *format, va_list *args)
             return FLAG_MAP[i].exec(args);
         }
     }
-    
     switch (*format) {
     case '\0':
         return -1;
