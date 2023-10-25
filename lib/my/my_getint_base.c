@@ -40,5 +40,6 @@ char *get_str(unsigned int nbr, char const *base)
 int my_getint_base(unsigned int nbr, char const *base)
 {
     char *str = get_str(nbr, base);
+
     return my_putstr(str);
 }

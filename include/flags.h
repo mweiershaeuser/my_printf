@@ -24,8 +24,8 @@ const flag_map FLAG_MAP[] = {
     {'s', &handle_str},
     {'%', &handle_percent},
     {'f', &handle_float},
-    {'X', &handle_hex_X},
-    {'x', &handle_hex_x},
+    {'X', &handle_hex_upper},
+    {'x', &handle_hex_lower},
     {'o', &handle_oct},
     {'u', &handle_unsigned}
 };

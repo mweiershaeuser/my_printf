@@ -7,12 +7,12 @@
 #include <stdarg.h>
 #include "include/my.h"
 
-int handle_hex_X(va_list *args)
+int handle_hex_upper(va_list *args)
 {
     return my_getint_base(va_arg(*args, unsigned int), "0123456789ABCDEF");
 }
 
-int handle_hex_x(va_list *args)
+int handle_hex_lower(va_list *args)
 {
     return my_getint_base(va_arg(*args, unsigned int), "0123456789abcdef");
 }
