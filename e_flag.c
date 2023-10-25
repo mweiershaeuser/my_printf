@@ -20,25 +20,35 @@ static int get_exp(double nb)
     return exp;
 }
 
-static int handle_scientific_not(va_list *params, char e)
+static void print_mantissa(double nb, int exp)
 {
-    double nb = va_arg(*params, double);
-    int exp;
-
     if (nb < 0) {
         my_putchar('-');
         nb = nb * -1;
     }
-    exp = get_exp(nb);
     for (int i = 0; i < exp; i++) {
         nb = nb / 10;
     }
     my_putfloat(nb, 6);
+}
+
+static void print_exp(int exp, char e)
+{
     my_putchar(e);
     if (exp < 10) {
         my_putchar('0');
     }
     my_put_nbr(exp);
+}
+
+static int handle_scientific_not(va_list *params, char e)
+{
+    double nb = va_arg(*params, double);
+    int exp;
+
+    exp = get_exp(nb);
+    print_mantissa(nb, exp);
+    print_exp(exp, e);
     return 0;
 }
 
