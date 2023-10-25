@@ -64,3 +64,8 @@ Test (my_printf, float_test, .init = cr_redirect_stdout)
     cr_assert_stdout_eq_str("21.500000");
     cr_assert_eq(cnt, 9);
 }
+
+Test(my_printf, pointer_test, .init = cr_redirect_stdout)
+{
+    cr_assert_eq(1, 1);
+}

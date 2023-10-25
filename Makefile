@@ -42,7 +42,8 @@ SRC	=	lib/my/helpers.c	\
 		lib/my/my_swap.c	\
 		my_printf.c		\
 		basic_flags.c		\
-		change_base.c
+		change_base.c		\
+		p_flag.c
 
 OBJ	=	$(SRC:.c=.o)
 

@@ -15,7 +15,7 @@ typedef struct flag_map {
     int (*exec) (va_list *params);
 } flag_map;
 
-const int FLAG_MAP_LENGTH = 10;
+const int FLAG_MAP_LENGTH = 11;
 
 const flag_map FLAG_MAP[] = {
     {'d', &handle_int},
@@ -27,6 +27,7 @@ const flag_map FLAG_MAP[] = {
     {'X', &handle_hex_upper},
     {'x', &handle_hex_lower},
     {'o', &handle_oct},
-    {'u', &handle_unsigned}
+    {'u', &handle_unsigned},
+    {'p', &handle_pointer}
 };
 #endif
