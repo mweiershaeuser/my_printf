@@ -12,7 +12,7 @@
 static int handle_n_flag(va_list *args, int cnt)
 {
     int *cur = va_arg(*args, int *);
-    
+
     *cur = cnt;
     return 0;
 }
@@ -25,9 +25,9 @@ static int handle_others(const char *format, va_list *args, int cnt)
     case '\0':
         return -1;
     default:
-	my_putchar('%');
+        my_putchar('%');
         my_putchar(*format);
-	return 2;
+        return 2;
     }
 }
 
