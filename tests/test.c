@@ -58,6 +58,15 @@ Test (my_printf, error, .init = cr_redirect_stdout)
     cr_assert_eq(cnt, -1);
 }
 
+Test (my_printf, n_test, .init = cr_redirect_stdout)
+{
+    int cur = 0;
+    int cnt = my_printf("testing n%nsos", &cur);
+    cr_assert_stdout_eq_str("testing nsos");
+    cr_assert_eq(cnt, 12);
+    cr_assert_eq(cur, 9);
+}
+
 Test (my_printf, float_test, .init = cr_redirect_stdout)
 {
     int cnt = my_printf("%f", 21.5);
