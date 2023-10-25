@@ -13,4 +13,5 @@ int handle_int(va_list* params);
 int handle_char(va_list* params);
 int handle_str(va_list* params);
 int handle_percent(va_list* params);
+int handle_float(va_list* params);
 #endif

@@ -39,7 +39,8 @@ SRC	=	lib/my/helpers.c	\
 		lib/my/my_str_to_word_array.c	\
 		lib/my/my_strupcase.c	\
 		lib/my/my_swap.c	\
-		my_printf.c
+		my_printf.c		\
+		basic_flags.c
 
 OBJ	=	$(SRC:.c=.o)
 
