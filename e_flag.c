@@ -20,7 +20,7 @@ static int get_exp(double nb)
     return exp;
 }
 
-int handle_scientific_not(va_list *params)
+static int handle_scientific_not(va_list *params, char e)
 {
     double nb = va_arg(*params, double);
     int exp;
@@ -34,10 +34,20 @@ int handle_scientific_not(va_list *params)
         nb = nb / 10;
     }
     my_putfloat(nb, 6);
-    my_putchar('e');
+    my_putchar(e);
     if (exp < 10) {
         my_putchar('0');
     }
     my_put_nbr(exp);
     return 0;
+}
+
+int handle_scientific_not_lower(va_list *params)
+{
+    return handle_scientific_not(params, 'e');
+}
+
+int handle_scientific_not_upper(va_list *params)
+{
+    return handle_scientific_not(params, 'E');
 }
