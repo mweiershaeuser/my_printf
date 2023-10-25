@@ -9,6 +9,7 @@ SRC	=	lib/my/helpers.c	\
 		lib/my/my_compute_power_rec.c	\
 		lib/my/my_compute_square_root.c	\
 		lib/my/my_find_prime_sup.c	\
+		lib/my/my_getint_base.c 	\
 		lib/my/my_getnbr.c	\
 		lib/my/my_isneg.c	\
 		lib/my/my_is_prime.c	\
@@ -40,7 +41,8 @@ SRC	=	lib/my/helpers.c	\
 		lib/my/my_strupcase.c	\
 		lib/my/my_swap.c	\
 		my_printf.c		\
-		basic_flags.c
+		basic_flags.c		\
+		change_base.c
 
 OBJ	=	$(SRC:.c=.o)
 
