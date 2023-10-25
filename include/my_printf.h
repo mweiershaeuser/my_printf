@@ -19,4 +19,5 @@ int handle_hex_lower(va_list *params);
 int handle_oct(va_list *params);
 int handle_unsigned(va_list *params);
 int handle_pointer(va_list *params);
+int handle_scientific_not(va_list *params);
 #endif

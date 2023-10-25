@@ -11,7 +11,8 @@
 
 static int handle_n_flag(va_list *args, int cnt)
 {
-    int * cur = va_arg(*args, int *);
+    int *cur = va_arg(*args, int *);
+    
     *cur = cnt;
     return 0;
 }

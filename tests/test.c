@@ -78,3 +78,9 @@ Test(my_printf, pointer_test, .init = cr_redirect_stdout)
 {
     cr_assert_eq(1, 1);
 }
+
+Test(my_printf, scientific_notation_test, .init = cr_redirect_stdout)
+{
+    my_printf("%e %e", 2.0, 14.45);
+    cr_assert_stdout_eq_str("2.000000e+00 1.445000e+01");
+}
