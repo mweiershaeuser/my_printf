@@ -48,7 +48,7 @@ NAME	=	libmy.a
 
 TESTS	=	unit_tests
 
-.PHONY: all clean_emacs clean fclean re tests_run tests_run_cov
+.PHONY: all clean_emacs clean_tests clean fclean re tests_run tests_run_cov
 
 all: $(NAME)
 
@@ -58,11 +58,15 @@ $(NAME):	$(OBJ)
 clean_emacs:
 	find . \( -name "*~" -or -name "#*#" \) -delete
 
+clean_tests:
+	rm -f $(TESTS)
+	rm -rf coverage
+
 clean: clean_emacs
 	rm -f $(OBJ)
 
-fclean:		clean
-	rm -f $(NAME) $(TESTS)
+fclean:		clean clean_tests
+	rm -f $(NAME)
 
 re: fclean all
 
@@ -74,7 +78,7 @@ $(TESTS): re
 tests_run: $(TESTS)
 	cd coverage && ./$(TESTS)
 
-tests_run_cov:
+tests_run_cov: $(TESTS)
 	mkdir -p coverage
 	cd coverage && \
 	gcc -o $(TESTS) ../*.c ../tests/*.c -L ../ -lmy --coverage -lcriterion
