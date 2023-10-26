@@ -38,12 +38,38 @@ static int handle_others(const char *format, va_list *args, int cnt)
 
 static char *get_flag(const char **format)
 {
-    return "";
+    int pos = 0;
+    int i = 0;
+    char *found = malloc(sizeof(char) * 6);
+
+    while (i < FLAGS_LENGTH) {
+        if (FLAGS[i] == **format) {
+            found[pos] = **format;
+            pos++;
+            (*format)++;
+            i = 0;
+        } else
+            i++;
+    }
+    found[pos] = '\0';
+    return found;
 }
 
 static int get_width(const char **format)
 {
-    return 0;
+    int pos = 0;
+    int res = -1;
+    char *str = malloc(sizeof(char) * 11);
+
+    while (is_number(**format)) {
+        str[pos] = **format;
+        pos++;
+        (*format)++;
+    }
+    if (my_strlen(str))
+        res = my_getnbr(str);
+    free(str);
+    return res;
 }
 
 static int get_precision(const char **format)
@@ -100,13 +126,17 @@ static int convert(const char *format, va_list *args,
 static int get_format(const char **format, va_list *args, int cnt)
 {
     format_string *fs;
+    int res = 0;
 
-    fs = malloc(sizeof(format_string));
+    fs = malloc(sizeof(format_string) + 1);
     fs->flags = get_flag(format);
     fs->width = get_width(format);
     fs->precision = get_precision(format);
     fs->len_mod = get_len_mod(format);
-    return convert(*format, args, cnt, fs);
+    res = convert(*format, args, cnt, fs);
+    free(fs->flags);
+    free(fs);
+    return res;
 }
 
 int my_printf(const char *format, ...)
