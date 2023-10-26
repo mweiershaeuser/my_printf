@@ -10,6 +10,6 @@
 
 #ifndef FLAGS_H
     #define FLAGS_H
-const int FLAGS_LENGTH = 7;
-const char FLAGS[] = {'#', '0', '-', ' ', '+', '\'', 'I'};
+const int FLAGS_LENGTH = 5;
+const char FLAGS[] = {'#', '0', '-', ' ', '+'};
 #endif
