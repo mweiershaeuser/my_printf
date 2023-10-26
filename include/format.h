@@ -8,7 +8,6 @@
 #ifndef FORMAT_H
     #define FORMAT_H
 typedef struct format_string {
-    int dollar;
     char *flags;
     int width;
     int precision;

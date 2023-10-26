@@ -36,11 +36,6 @@ static int handle_others(const char *format, va_list *args, int cnt)
     }
 }
 
-static int get_dollar(const char **format)
-{
-    return 0;
-}
-
 static char *get_flag(const char **format)
 {
     return "";
@@ -77,7 +72,6 @@ static int get_format(const char **format, va_list *args, int cnt)
     format_string *fs;
 
     fs = malloc(sizeof(format_string));
-    fs->dollar = get_dollar(format);
     fs->flags = get_flag(format);
     fs->width = get_width(format);
     fs->precision = get_precision(format);
