@@ -36,32 +36,33 @@ static int handle_others(const char *format, va_list *args, int cnt)
     }
 }
 
-static int get_dollar()
+static int get_dollar(const char **format)
 {
     return 0;
 }
 
-static char *get_flag()
+static char *get_flag(const char **format)
 {
     return "";
 }
 
-static int get_width()
+static int get_width(const char **format)
 {
     return 0;
 }
 
-static int get_precision()
+static int get_precision(const char **format)
 {
     return 0;
 }
 
-static char *get_len_mod()
+static char *get_len_mod(const char **format)
 {
     return "";
 }
 
-static int convert(const char *format, va_list *args, int cnt, format_string *fs)
+static int convert(const char *format, va_list *args,
+    int cnt, format_string *fs)
 {
     for (int i = 0; i < CONVERSION_MAP_LENGTH; i++) {
         if (CONVERSION_MAP[i].spec == *format) {
@@ -71,16 +72,17 @@ static int convert(const char *format, va_list *args, int cnt, format_string *fs
     return handle_others(format, args, cnt);
 }
 
-static int get_format(const char *format, va_list *args, int cnt)
+static int get_format(const char **format, va_list *args, int cnt)
 {
     format_string *fs;
+
     fs = malloc(sizeof(format_string));
-    fs->dollar = get_dollar();
-    fs->flags = get_flag();
-    fs->width = get_width();
-    fs->precision = get_precision();
-    fs->len_mod = get_len_mod();
-    return convert(format, args, cnt, fs);
+    fs->dollar = get_dollar(format);
+    fs->flags = get_flag(format);
+    fs->width = get_width(format);
+    fs->precision = get_precision(format);
+    fs->len_mod = get_len_mod(format);
+    return convert(*format, args, cnt, fs);
 }
 
 int my_printf(const char *format, ...)
@@ -93,7 +95,7 @@ int my_printf(const char *format, ...)
     while (*format != '\0') {
         if (*format == '%') {
             format++;
-            res = get_format(format, &args, cnt);
+            res = get_format(&format, &args, cnt);
             cnt += res;
         } else {
             my_putchar(*format);
