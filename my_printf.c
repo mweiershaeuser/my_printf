@@ -97,18 +97,18 @@ static char *get_len_mod(const char **format)
 {
     int pos = 0;
     char *len_mod = malloc(sizeof(char) * 3);
-    int len_mod_len;
+    int len_mod_len = 0;
 
     for (int i = 0; i < LEN_MODS_LENGTH; i++) {
         len_mod_len = my_strlen(LEN_MODS[i]);
         if (!my_strncmp(*format, LEN_MODS[i], len_mod_len)) {
             my_strncpy(len_mod, *format, len_mod_len);
             pos = pos + len_mod_len;
+            (*format) += len_mod_len;
             break;
         }
     }
     len_mod[pos] = '\0';
-    format = format + len_mod_len;
     return len_mod;
 }
 
@@ -135,6 +135,7 @@ static int get_format(const char **format, va_list *args, int cnt)
     fs->len_mod = get_len_mod(format);
     res = convert(*format, args, cnt, fs);
     free(fs->flags);
+    free(fs->len_mod);
     free(fs);
     return res;
 }

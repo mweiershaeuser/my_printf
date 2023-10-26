@@ -13,9 +13,9 @@
 const int LEN_MODS_LENGTH = 10;
 const char *LEN_MODS[] = {
     "hh",
+    "ll",
     "h",
     "l",
-    "ll",
     "q",
     "L",
     "j",
