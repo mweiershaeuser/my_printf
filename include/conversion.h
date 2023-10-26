@@ -7,12 +7,13 @@
 
 #include <stdarg.h>
 #include "my_printf.h"
+#include "format.h"
 
 #ifndef CONVERSION_H
     #define CONVERSION_H
 typedef struct conversion_map {
     char spec;
-    int (*exec) (va_list *params);
+    int (*exec) (va_list *params, format_string *fs);
 } conversion_map;
 
 const int CONVERSION_MAP_LENGTH = 13;

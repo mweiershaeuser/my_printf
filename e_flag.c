@@ -7,6 +7,7 @@
 
 #include <stdarg.h>
 #include "include/my.h"
+#include "include/format.h"
 
 static int get_exp(double nb)
 {
@@ -41,7 +42,7 @@ static void print_exp(int exp, char e)
     my_put_nbr(exp);
 }
 
-static int handle_scientific_not(va_list *params, char e)
+static int handle_scientific_not(va_list *params, format_string *fs, char e)
 {
     double nb = va_arg(*params, double);
     int exp;
@@ -52,12 +53,12 @@ static int handle_scientific_not(va_list *params, char e)
     return 0;
 }
 
-int handle_scientific_not_lower(va_list *params)
+int handle_scientific_not_lower(va_list *params, format_string *fs)
 {
-    return handle_scientific_not(params, 'e');
+    return handle_scientific_not(params, fs, 'e');
 }
 
-int handle_scientific_not_upper(va_list *params)
+int handle_scientific_not_upper(va_list *params, format_string *fs)
 {
-    return handle_scientific_not(params, 'E');
+    return handle_scientific_not(params, fs, 'E');
 }

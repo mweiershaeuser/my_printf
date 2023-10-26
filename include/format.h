@@ -12,7 +12,6 @@ typedef struct format_string {
     char *flags;
     int width;
     int precision;
-    char **len_mod;
-    char *conversion;
+    char *len_mod;
 } format_string;
 #endif

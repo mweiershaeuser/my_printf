@@ -4,9 +4,14 @@
 ** File description:
 ** My printf
 */
+
+#include <stdlib.h>
 #include <stdarg.h>
 #include "include/my.h"
 #include "include/my_printf.h"
+#include "include/format.h"
+#include "include/flags.h"
+#include "include/len_mod.h"
 #include "include/conversion.h"
 
 static int handle_n_flag(va_list *args, int cnt)
@@ -31,14 +36,51 @@ static int handle_others(const char *format, va_list *args, int cnt)
     }
 }
 
-static int get_format(const char *format, va_list *args, int cnt)
+static int get_dollar()
+{
+    return 0;
+}
+
+static char *get_flag()
+{
+    return "";
+}
+
+static int get_width()
+{
+    return 0;
+}
+
+static int get_precision()
+{
+    return 0;
+}
+
+static char *get_len_mod()
+{
+    return "";
+}
+
+static int convert(const char *format, va_list *args, int cnt, format_string *fs)
 {
     for (int i = 0; i < CONVERSION_MAP_LENGTH; i++) {
         if (CONVERSION_MAP[i].spec == *format) {
-            return CONVERSION_MAP[i].exec(args);
+            return CONVERSION_MAP[i].exec(args, fs);
         }
     }
     return handle_others(format, args, cnt);
+}
+
+static int get_format(const char *format, va_list *args, int cnt)
+{
+    format_string *fs;
+    fs = malloc(sizeof(format_string));
+    fs->dollar = get_dollar();
+    fs->flags = get_flag();
+    fs->width = get_width();
+    fs->precision = get_precision();
+    fs->len_mod = get_len_mod();
+    return convert(format, args, cnt, fs);
 }
 
 int my_printf(const char *format, ...)

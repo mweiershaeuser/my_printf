@@ -6,19 +6,20 @@
 */
 
 #include <stdarg.h>
+#include "format.h"
 
 #ifndef MY_PRINTF_H
     #define MY_PRINTF_H
-int handle_int(va_list *params);
-int handle_char(va_list *params);
-int handle_str(va_list *params);
-int handle_percent(va_list *params);
-int handle_float(va_list *params);
-int handle_hex_upper(va_list *params);
-int handle_hex_lower(va_list *params);
-int handle_oct(va_list *params);
-int handle_unsigned(va_list *params);
-int handle_pointer(va_list *params);
-int handle_scientific_not_lower(va_list *params);
-int handle_scientific_not_upper(va_list *params);
+int handle_int(va_list *params, format_string *fs);
+int handle_char(va_list *params, format_string *fs);
+int handle_str(va_list *params, format_string *fs);
+int handle_percent(va_list *params, format_string *fs);
+int handle_float(va_list *params, format_string *fs);
+int handle_hex_upper(va_list *params, format_string *fs);
+int handle_hex_lower(va_list *params, format_string *fs);
+int handle_oct(va_list *params, format_string *fs);
+int handle_unsigned(va_list *params, format_string *fs);
+int handle_pointer(va_list *params, format_string *fs);
+int handle_scientific_not_lower(va_list *params, format_string *fs);
+int handle_scientific_not_upper(va_list *params, format_string *fs);
 #endif
