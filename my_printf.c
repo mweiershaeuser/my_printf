@@ -48,12 +48,42 @@ static int get_width(const char **format)
 
 static int get_precision(const char **format)
 {
-    return 0;
+    char *str = malloc(sizeof(char) * 11);
+    int res = -1;
+    int pos = 0;
+
+    if (**format != '.') {
+        return -1;
+    }
+    (*format)++;
+    while (is_number(**format)) {
+        str[pos] = **format;
+        (*format)++;
+        pos++;
+    }
+    str[pos] = '\0';
+    res = my_getnbr(str);
+    free(str);
+    return res;
 }
 
 static char *get_len_mod(const char **format)
 {
-    return "";
+    int pos = 0;
+    char *len_mod = malloc(sizeof(char) * 3);
+    int len_mod_len;
+
+    for (int i = 0; i < LEN_MODS_LENGTH; i++) {
+        len_mod_len = my_strlen(LEN_MODS[i]);
+        if (!my_strncmp(*format, LEN_MODS[i], len_mod_len)) {
+            my_strncpy(len_mod, *format, len_mod_len);
+            pos = pos + len_mod_len;
+            break;
+        }
+    }
+    len_mod[pos] = '\0';
+    format = format + len_mod_len;
+    return len_mod;
 }
 
 static int convert(const char *format, va_list *args,
