@@ -9,5 +9,5 @@
 
 int handle_pointer(va_list *params)
 {
-    return 0;
+    return my_getint_base(va_arg(*params, unsigned int), "0123456789abcdef");
 }
