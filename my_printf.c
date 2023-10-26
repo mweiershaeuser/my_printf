@@ -7,7 +7,7 @@
 #include <stdarg.h>
 #include "include/my.h"
 #include "include/my_printf.h"
-#include "include/flags.h"
+#include "include/conversion.h"
 
 static int handle_n_flag(va_list *args, int cnt)
 {
@@ -33,9 +33,9 @@ static int handle_others(const char *format, va_list *args, int cnt)
 
 static int get_format(const char *format, va_list *args, int cnt)
 {
-    for (int i = 0; i < FLAG_MAP_LENGTH; i++) {
-        if (FLAG_MAP[i].flag == *format) {
-            return FLAG_MAP[i].exec(args);
+    for (int i = 0; i < CONVERSION_MAP_LENGTH; i++) {
+        if (CONVERSION_MAP[i].spec == *format) {
+            return CONVERSION_MAP[i].exec(args);
         }
     }
     return handle_others(format, args, cnt);

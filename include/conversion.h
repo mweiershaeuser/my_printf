@@ -1,23 +1,23 @@
 /*
 ** EPITECH PROJECT, 2023
-** flags
+** conversion specifiers
 ** File description:
-** Header file for flags in my_printf
+** Header file for conversion specifiers in my_printf
 */
 
 #include <stdarg.h>
 #include "my_printf.h"
 
-#ifndef FLAGS_H
-    #define FLAGS_H
-typedef struct flag_map {
-    char flag;
+#ifndef CONVERSION_H
+    #define CONVERSION_H
+typedef struct conversion_map {
+    char spec;
     int (*exec) (va_list *params);
-} flag_map;
+} conversion_map;
 
-const int FLAG_MAP_LENGTH = 13;
+const int CONVERSION_MAP_LENGTH = 13;
 
-const flag_map FLAG_MAP[] = {
+const conversion_map CONVERSION_MAP[] = {
     {'d', &handle_int},
     {'i', &handle_int},
     {'c', &handle_char},
