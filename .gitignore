@@ -13,3 +13,5 @@ coding-style-reports.log
 **/unit_tests
 **/*.gcda
 **/*.gcno
+
+tests/write_output.c

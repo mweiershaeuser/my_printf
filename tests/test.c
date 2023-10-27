@@ -1,6 +1,7 @@
 #include <criterion/criterion.h>
 #include <criterion/redirect.h>
 #include "../include/my.h"
+#include "helpers.h"
 
 Test (my_printf, simple_string, .init = cr_redirect_stdout)
 {
@@ -88,5 +89,6 @@ Test(my_printf, scientific_notation_lower, .init = cr_redirect_stdout)
 Test(my_printf, scientific_notation_upper, .init = cr_redirect_stdout)
 {
     my_printf("%E %E", 2.0, 14.45);
+    receive_output("scientific_notation_upper_test.txt"); 
     cr_assert_stdout_eq_str("2.000000E+00 1.445000E+01");
 }
