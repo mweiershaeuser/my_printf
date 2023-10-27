@@ -10,6 +10,7 @@ main.c
 
 coding-style-reports.log
 
+coverage
 **/unit_tests
 **/*.gcda
 **/*.gcno
