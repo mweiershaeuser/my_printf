@@ -15,6 +15,7 @@ int my_compute_power_rec(int nb, int p);
 int my_compute_square_root(int nb);
 int my_find_prime_sup(int nb);
 int my_getint_base(unsigned int nbr, char const *base);
+int my_get_nbr_len(int nb);
 int my_getnbr(char const *str);
 int my_isneg(int n);
 int my_is_prime(int nb);
