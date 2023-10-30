@@ -20,6 +20,24 @@ Test (my_printf, hex_X_test, .init = cr_redirect_stdout)
     cr_assert_eq(cnt, 5);
 }
 
+Test (my_printf, hex_x_hash_test, .init = cr_redirect_stdout)
+{
+    unsigned int test1 = 42;
+    unsigned int test2 = 0;
+    int cnt = my_printf("%#x %#x", test1, test2);
+    cr_assert_stdout_eq_str("0x2a 0");
+    cr_assert_eq(cnt, 6);
+}
+
+Test (my_printf, hex_X_hash_test, .init = cr_redirect_stdout)
+{
+    unsigned int test1 = 42;
+    unsigned int test2 = 0;
+    int cnt = my_printf("%#X %#X", test1, test2);
+    cr_assert_stdout_eq_str("0X2A 0");
+    cr_assert_eq(cnt, 6);
+}
+
 Test (my_printf, oct_test, .init = cr_redirect_stdout)
 {
     unsigned int test1 = 42;
