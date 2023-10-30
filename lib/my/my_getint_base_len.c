@@ -29,6 +29,8 @@ static char *get_str(unsigned long long int nbr, char const *base)
     int size = my_getint_base_size(nbr, base);
     char *dest = malloc(sizeof(char) * (size + 1));
 
+    if (nbr == 0)
+        return "0";
     while (nbr != 0) {
         dig = nbr % len;
         nbr = nbr / len;
