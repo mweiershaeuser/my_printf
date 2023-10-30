@@ -8,12 +8,6 @@
 #include "include/my.h"
 #include "include/format.h"
 
-int handle_char(va_list *args, format_string *fs)
-{
-    my_putchar(va_arg(*args, int));
-    return 1;
-}
-
 int handle_str(va_list *args, format_string *fs)
 {
     return my_putstr(va_arg(*args, char *));
