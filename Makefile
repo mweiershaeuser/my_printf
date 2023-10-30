@@ -16,6 +16,7 @@ SRC	=	lib/my/helpers.c	\
 		lib/my/my_isneg.c	\
 		lib/my/my_is_prime.c	\
 		lib/my/my_putchar.c	\
+		lib/my/my_put_ll.c      \
 		lib/my/my_put_nbr.c	\
 		lib/my/my_putfloat.c	\
 		lib/my/my_putstr.c	\

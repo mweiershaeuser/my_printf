@@ -6,7 +6,7 @@
 */
 #include "../../include/my.h"
 
-static long int get_next(long int nb)
+static long int get_next(long long int nb)
 {
     int cnt = 1;
 
@@ -17,9 +17,9 @@ static long int get_next(long int nb)
     return cnt;
 }
 
-int my_get_nbr_len(int nb)
+int my_get_nbr_len(long long int nb)
 {
-    long int lg = nb;
+    long long int lg = nb;
     int cnt = 0;
 
     if (lg < 0) {
