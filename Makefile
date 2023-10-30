@@ -10,6 +10,7 @@ SRC	=	lib/my/helpers.c	\
 		lib/my/my_compute_square_root.c	\
 		lib/my/my_find_prime_sup.c	\
 		lib/my/my_getint_base.c 	\
+		lib/my/my_getint_base_len.c         \
 		lib/my/my_getnbr.c	\
 		lib/my/my_get_nbr_len.c	\
 		lib/my/my_isneg.c	\

@@ -11,5 +11,11 @@
 
 int handle_pointer(va_list *params, format_string *fs)
 {
-    return my_getint_base(va_arg(*params, unsigned int), "0123456789abcdef");
+    int cnt = 2;
+    unsigned long long int n = va_arg(*params, unsigned long long int);
+
+    cnt += my_getint_base_len(n, "0123456789abcdef");
+    my_putstr("0x");
+    my_getint_base(n, "0123456789abcdef");
+    return cnt;
 }

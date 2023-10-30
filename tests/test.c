@@ -75,11 +75,6 @@ Test (my_printf, float_test, .init = cr_redirect_stdout)
     cr_assert_eq(cnt, 9);
 }
 
-Test(my_printf, pointer_test, .init = cr_redirect_stdout)
-{
-    cr_assert_eq(1, 1);
-}
-
 Test(my_printf, scientific_notation_lower, .init = cr_redirect_stdout)
 {
     my_printf("%e %e", 2.0, 14.45);

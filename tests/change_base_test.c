@@ -37,3 +37,11 @@ Test (my_printf, unsigned_test, .init = cr_redirect_stdout)
     cr_assert_stdout_eq_str("42 123");
     cr_assert_eq(cnt, 6);
 }
+
+Test (my_printf, pointer_test, .init = cr_redirect_stdout)
+{
+    unsigned long long int fake_pointer = 140728941421448;
+    int cnt = my_printf("%p", fake_pointer);
+    cr_assert_stdout_eq_str("0x7ffe02902388");
+    cr_assert_eq(cnt, 14);
+}
