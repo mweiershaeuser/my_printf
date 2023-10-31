@@ -48,7 +48,7 @@ SRC	=	lib/my/helpers.c	\
 		handle_int.c		\
 		change_base.c		\
 		p_flag.c		\
-		e_flag.c		\
+		handle_e.c		\
 		handle_c.c
 
 OBJ	=	$(SRC:.c=.o)
