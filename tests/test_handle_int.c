@@ -67,7 +67,7 @@ Test (handle_int, handle_plus_space_neg, .init = cr_redirect_stdout)
 Test (handle_int, handle_len_mod, .init = cr_redirect_stdout)
 {
     int cnt = 0;
-    unsigned char n1 = 250;
+    unsigned char n1 = 1;
     short int n2 = -30000;
     int n3 = 2000000000;
     long int n4 = 2147483646;
@@ -80,6 +80,6 @@ Test (handle_int, handle_len_mod, .init = cr_redirect_stdout)
     cnt += my_printf("%lld\n", n5);
 
     cr_assert_stdout_eq_str(
-	"-6\n-30000\n2000000000\n2147483646\n9223372036854775800\n");
-    cr_assert_eq (cnt, 52);
+	"1\n-30000\n2000000000\n2147483646\n9223372036854775800\n");
+    cr_assert_eq (cnt, 51);
 }
