@@ -71,6 +71,21 @@ Test (my_printf, oct_test, .init = cr_redirect_stdout)
     cr_assert_eq(cnt, 6);
 }
 
+Test (my_printf, oct_flags_test, .init = cr_redirect_stdout)
+{
+    unsigned int n = 42;
+    int cnt = 0;
+    cnt += my_printf("%#o\n", n);
+    cnt += my_printf("%#10o\n", n);
+    cnt += my_printf("% 010o\n", n);
+    cnt += my_printf("%+ -10o\n", n);
+    cnt += my_printf("%+ -010o\n", n);
+    cnt += my_printf("%+ 0-10o\n", n);
+    cr_assert_stdout_eq_str(
+        "052\n       052\n0000000052\n52        \n52        \n52        \n");
+    cr_assert_eq(cnt, 59);
+}
+
 Test (my_printf, unsigned_test, .init = cr_redirect_stdout)
 {
     unsigned int test1 = 42;
