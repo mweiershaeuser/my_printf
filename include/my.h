@@ -14,6 +14,7 @@ int is_number(char c);
 int my_compute_power_rec(int nb, int p);
 int my_compute_square_root(int nb);
 int my_find_prime_sup(int nb);
+int my_getfloat_len(double nb, int precision);
 int my_getint_base(unsigned long long int nbr, char const *base);
 int my_getint_base_len(unsigned long long int nbr, char const *base);
 int my_get_nbr_len(long long int nb);
