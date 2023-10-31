@@ -33,11 +33,14 @@ int get_exp(double nb)
     return exp;
 }
 
-static void print_mantissa(double nb, int exp)
+static int print_mantissa(double nb, int exp)
 {
+    int count = 0;
+
     if (nb < 0) {
         my_putchar('-');
         nb = nb * -1;
+        count++;
     }
     if (exp < 0) {
         for (int i = 0; i > exp; i--) {
@@ -48,11 +51,14 @@ static void print_mantissa(double nb, int exp)
             nb = nb / 10;
         }
     }
-    my_putfloat(nb, 6);
+    count += my_putfloat(nb, 6);
+    return count;
 }
 
-static void print_exp(int exp, char e)
+static int print_exp(int exp, char e)
 {
+    int count = 2;
+
     my_putchar(e);
     if (exp < 0) {
         my_putchar('-');
@@ -62,19 +68,22 @@ static void print_exp(int exp, char e)
     }
     if (exp < 10) {
         my_putchar('0');
+        count++;
     }
-    my_put_nbr(exp);
+    count += my_put_nbr(exp);
+    return count;
 }
 
 static int handle_scientific_not(va_list *params, format_string *fs, char e)
 {
     double nb = va_arg(*params, double);
     int exp;
+    int count = 0;
 
     exp = get_exp(nb);
-    print_mantissa(nb, exp);
-    print_exp(exp, e);
-    return 0;
+    count += print_mantissa(nb, exp);
+    count += print_exp(exp, e);
+    return count;
 }
 
 int handle_scientific_not_lower(va_list *params, format_string *fs)
