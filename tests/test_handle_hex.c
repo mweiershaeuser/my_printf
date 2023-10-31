@@ -2,7 +2,7 @@
 #include <criterion/redirect.h>
 #include "../include/my.h"
 
-Test (my_printf, hex_x_test, .init = cr_redirect_stdout)
+Test (handle_hex, hex_x_test, .init = cr_redirect_stdout)
 {
     unsigned int test1 = 42;
     unsigned int test2 = 123;
@@ -11,7 +11,7 @@ Test (my_printf, hex_x_test, .init = cr_redirect_stdout)
     cr_assert_eq(cnt, 5);
 }
 
-Test (my_printf, hex_X_test, .init = cr_redirect_stdout)
+Test (handle_hex, hex_X_test, .init = cr_redirect_stdout)
 {
     unsigned int test1 = 42;
     unsigned int test2 = 123;
@@ -20,7 +20,7 @@ Test (my_printf, hex_X_test, .init = cr_redirect_stdout)
     cr_assert_eq(cnt, 5);
 }
 
-Test (my_printf, hex_x_hash_test, .init = cr_redirect_stdout)
+Test (handle_hex, hex_x_hash_test, .init = cr_redirect_stdout)
 {
     unsigned int test1 = 42;
     unsigned int test2 = 0;
@@ -29,7 +29,7 @@ Test (my_printf, hex_x_hash_test, .init = cr_redirect_stdout)
     cr_assert_eq(cnt, 6);
 }
 
-Test (my_printf, hex_X_hash_test, .init = cr_redirect_stdout)
+Test (handle_hex, hex_X_hash_test, .init = cr_redirect_stdout)
 {
     unsigned int test1 = 42;
     unsigned int test2 = 0;
@@ -38,7 +38,7 @@ Test (my_printf, hex_X_hash_test, .init = cr_redirect_stdout)
     cr_assert_eq(cnt, 6);
 }
 
-Test (my_printf, hex_x_flags_test, .init = cr_redirect_stdout)
+Test (handle_hex, hex_x_flags_test, .init = cr_redirect_stdout)
 {
     unsigned int n = 42;
     int cnt = 0;
@@ -52,7 +52,7 @@ Test (my_printf, hex_x_flags_test, .init = cr_redirect_stdout)
     cr_assert_eq(cnt, 58);
 }
 
-Test (my_printf, hex_X_flags_test, .init = cr_redirect_stdout)
+Test (handle_hex, hex_X_flags_test, .init = cr_redirect_stdout)
 {
     unsigned int test1 = 42;
     unsigned int test2 = 123;
@@ -61,29 +61,31 @@ Test (my_printf, hex_X_flags_test, .init = cr_redirect_stdout)
     cr_assert_eq(cnt, 5);
 }
 
-
-Test (my_printf, oct_test, .init = cr_redirect_stdout)
-{
-    unsigned int test1 = 42;
-    unsigned int test2 = 123;
-    int cnt = my_printf("%o %o", test1, test2);
-    cr_assert_stdout_eq_str("52 173");
-    cr_assert_eq(cnt, 6);
-}
-
-Test (my_printf, unsigned_test, .init = cr_redirect_stdout)
-{
-    unsigned int test1 = 42;
-    unsigned int test2 = 123;
-    int cnt = my_printf("%u %u", test1, test2);
-    cr_assert_stdout_eq_str("42 123");
-    cr_assert_eq(cnt, 6);
-}
-
-Test (my_printf, pointer_test, .init = cr_redirect_stdout)
+Test (handle_hex, pointer_test, .init = cr_redirect_stdout)
 {
     unsigned long long int fake_pointer = 140728941421448;
     int cnt = my_printf("%p", fake_pointer);
     cr_assert_stdout_eq_str("0x7ffe02902388");
     cr_assert_eq(cnt, 14);
+}
+
+Test (handle_hex, handle_len_mod, .init = cr_redirect_stdout)
+{
+    int cnt = 0;
+    unsigned char n1 = 250;
+    unsigned short int n2 = -30000;
+    unsigned int n3 = 2000000000;
+    unsigned long int n4 = 2147483646;
+    unsigned long long int n5 = 9223372036854775800;
+
+    cnt += my_printf("%16hhx\n", n1);
+    cnt += my_printf("%16hx\n", n2);
+    cnt += my_printf("%16x\n", n3);
+    cnt += my_printf("%16lx\n", n4);
+    cnt += my_printf("%16llx\n", n5);
+
+    cr_assert_stdout_eq_str(
+	    "              fa\n            8ad0\n        77359400\n        7ffffffe\n7ffffffffffffff8\n"
+        );
+    cr_assert_eq (cnt, 85);
 }

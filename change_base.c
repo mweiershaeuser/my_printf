@@ -8,28 +8,6 @@
 #include "include/my.h"
 #include "include/format.h"
 
-static int validate_hash(format_string *fs, int is_upper)
-{
-    if (my_strstr(fs->flags, "#")) {
-        my_putstr(is_upper ? "0X" : "0x");
-        return 2;
-    } else
-        return 0;
-}
-
-static int put_hex(unsigned int n, format_string *fs, int is_upper)
-{
-    int cnt = 0;
-
-    if (n == 0) {
-        my_putchar('0');
-        return 1;
-    }
-    cnt += my_getint_base(n,
-        is_upper ? "0123456789ABCDEF" : "0123456789abcdef");
-    return cnt;
-}
-
 static void put_chars(int n, char c)
 {
     for (int i = 0; i < n; i++) {
@@ -37,7 +15,7 @@ static void put_chars(int n, char c)
     }
 }
 
-static int handle_width(int n, int num_len, format_string *fs, int is_upper)
+static int handle_width_oct(unsigned int n, int num_len, format_string *fs)
 {
     char *right = my_strstr(fs->flags, "-");
     char *zero = my_strstr(fs->flags, "0");
@@ -45,18 +23,34 @@ static int handle_width(int n, int num_len, format_string *fs, int is_upper)
     if (right == 0 && zero == 0) {
         put_chars(fs->width - num_len, ' ');
     }
-    validate_hash(fs, is_upper);
+    if (my_strstr(fs->flags, "#"))
+        my_putstr("0");
     if (right == 0 && zero != 0) {
         put_chars(fs->width - num_len, '0');
     }
-    put_hex(n, fs, is_upper);
+    my_getint_base(n, "01234567");
     if (right != 0) {
         put_chars(fs->width - num_len, ' ');
     }
     return fs->width;
 }
 
-static int handle_hex(va_list *args, format_string *fs, int is_upper)
+static int handle_width_uns(unsigned int n, int num_len, format_string *fs)
+{
+    char *right = my_strstr(fs->flags, "-");
+    char *zero = my_strstr(fs->flags, "0");
+
+    if (right == 0) {
+        put_chars(fs->width - num_len, zero != 0 ? '0' : ' ');
+    }
+    my_getint_base(n, "0123456789");
+    if (right != 0) {
+        put_chars(fs->width - num_len, ' ');
+    }
+    return fs->width;
+}
+
+int handle_oct(va_list *args, format_string *fs)
 {
     int cnt = 0;
     unsigned int n = va_arg(*args, unsigned int);
@@ -66,33 +60,31 @@ static int handle_hex(va_list *args, format_string *fs, int is_upper)
         return 1;
     }
     if (my_strstr(fs->flags, "#"))
-        cnt += 2;
-    cnt += my_getint_base_len(n, "0123456789abcdef");
+        cnt += 1;
+    cnt += my_getint_base_len(n, "01234567");
     if (cnt < fs->width) {
-        return handle_width(n, cnt, fs, is_upper);
+        return handle_width_oct(n, cnt, fs);
     } else {
-        validate_hash(fs, is_upper);
-        put_hex(n, fs, is_upper);
+        if (my_strstr(fs->flags, "#"))
+            my_putstr("0");
+        my_getint_base(n, "01234567");
         return cnt;
     }
 }
 
-int handle_hex_upper(va_list *args, format_string *fs)
-{
-    return handle_hex(args, fs, 1);
-}
-
-int handle_hex_lower(va_list *args, format_string *fs)
-{
-    return handle_hex(args, fs, 0);
-}
-
-int handle_oct(va_list *args, format_string *fs)
-{
-    return my_getint_base(va_arg(*args, unsigned int), "01234567");
-}
-
 int handle_unsigned(va_list *args, format_string *fs)
 {
-    return my_getint_base(va_arg(*args, unsigned int), "0123456789");
+    int cnt = 0;
+    unsigned int n = va_arg(*args, unsigned int);
+
+    if (n == 0) {
+        my_putchar('0');
+        return 1;
+    }
+    cnt += my_getint_base_len(n, "0123456789");
+    if (cnt < fs->width) {
+        return handle_width_uns(n, cnt, fs);
+    } else {
+        return my_getint_base(n, "0123456789");
+    }
 }

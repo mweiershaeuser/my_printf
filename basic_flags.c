@@ -21,5 +21,11 @@ int handle_percent(va_list *args, format_string *fs)
 
 int handle_float(va_list *args, format_string *fs)
 {
-    return my_putfloat(va_arg(*args, double), 6);
+    int precision = fs->precision;
+
+    if (precision < 0)
+        return my_putfloat(va_arg(*args, double), 6);
+    if (precision == 0)
+        return my_put_nbr(va_arg(*args, double));
+    return my_putfloat(va_arg(*args, double), precision);
 }
