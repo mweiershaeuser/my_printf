@@ -56,8 +56,6 @@ static long long int get_n(va_list *args, format_string *fs)
 {
     long long int res = 0;
 
-    if (my_strlen(fs->len_mod) == 0)
-        return va_arg(*args, int);
     if (my_strcmp(fs->len_mod, "h") == 0)
         return (short) va_arg(*args, int);
     if (my_strcmp(fs->len_mod, "hh") == 0)
@@ -66,6 +64,7 @@ static long long int get_n(va_list *args, format_string *fs)
         return va_arg(*args, long int);
     if (my_strcmp(fs->len_mod, "ll") == 0)
         return va_arg(*args, long long int);
+    return va_arg(*args, int);
 }
 
 int handle_int(va_list *args, format_string *fs)

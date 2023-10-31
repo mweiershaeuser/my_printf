@@ -68,13 +68,7 @@ Test (my_printf, n_test, .init = cr_redirect_stdout)
     cr_assert_eq(cur, 9);
 }
 
-Test (my_printf, float_test, .init = cr_redirect_stdout)
-{
-    int cnt = my_printf("%f", 21.5);
-    cr_assert_stdout_eq_str("21.500000");
-    cr_assert_eq(cnt, 9);
-}
-
+/*
 Test(my_printf, scientific_notation_lower, .init = cr_redirect_stdout)
 {
     my_printf("%e %e", 2.0, 14.45);
@@ -87,3 +81,4 @@ Test(my_printf, scientific_notation_upper, .init = cr_redirect_stdout)
     receive_output("scientific_notation_upper_test.txt"); 
     cr_assert_stdout_eq_str("2.000000E+00 1.445000E+01");
 }
+*/

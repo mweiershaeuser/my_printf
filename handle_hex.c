@@ -21,10 +21,6 @@ static int put_hex(unsigned long long int n, format_string *fs, int is_upper)
 {
     int cnt = 0;
 
-    if (n == 0) {
-        my_putchar('0');
-        return 1;
-    }
     cnt += my_getint_base(n,
         is_upper ? "0123456789ABCDEF" : "0123456789abcdef");
     return cnt;
@@ -61,8 +57,6 @@ static unsigned long long int get_n(va_list *args, format_string *fs)
 {
     unsigned long long int res = 0;
 
-    if (my_strlen(fs->len_mod) == 0)
-        return va_arg(*args, unsigned int);
     if (my_strcmp(fs->len_mod, "h") == 0)
         return (unsigned short int) va_arg(*args, int);
     if (my_strcmp(fs->len_mod, "hh") == 0)
@@ -71,6 +65,7 @@ static unsigned long long int get_n(va_list *args, format_string *fs)
         return va_arg(*args, unsigned long int);
     if (my_strcmp(fs->len_mod, "ll") == 0)
         return va_arg(*args, unsigned long long int);
+    return va_arg(*args, unsigned int);
 }
 
 static int handle_hex(va_list *args, format_string *fs, int is_upper)

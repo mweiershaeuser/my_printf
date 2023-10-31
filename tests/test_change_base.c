@@ -52,3 +52,12 @@ Test (my_printf, unsigned_flags_test, .init = cr_redirect_stdout)
         "42\n        42\n0000000042\n42        \n42        \n42        \n");
     cr_assert_eq(cnt, 58);
 }
+
+Test (my_printf, oct_uns_zero, .init = cr_redirect_stdout)
+{
+    unsigned int test1 = 0;
+    int cnt = my_printf("%o %u", test1, test1);
+
+    cr_assert_stdout_eq_str("0 0");
+    cr_assert_eq(cnt, 3);
+}
