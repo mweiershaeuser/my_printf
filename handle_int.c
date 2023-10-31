@@ -52,7 +52,7 @@ static int handle_width(long long int n, int num_len,
     return fs->width;
 }
 
-long long int get_n(va_list *args, format_string *fs)
+static long long int get_n(va_list *args, format_string *fs)
 {
     long long int res = 0;
 

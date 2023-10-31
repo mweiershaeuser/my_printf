@@ -17,7 +17,7 @@ static int validate_hash(format_string *fs, int is_upper)
         return 0;
 }
 
-static int put_hex(unsigned int n, format_string *fs, int is_upper)
+static int put_hex(unsigned long long int n, format_string *fs, int is_upper)
 {
     int cnt = 0;
 
@@ -37,7 +37,8 @@ static void put_chars(int n, char c)
     }
 }
 
-static int handle_width(int n, int num_len, format_string *fs, int is_upper)
+static int handle_width(
+    unsigned long long int n, int num_len, format_string *fs, int is_upper)
 {
     char *right = my_strstr(fs->flags, "-");
     char *zero = my_strstr(fs->flags, "0");
@@ -56,10 +57,26 @@ static int handle_width(int n, int num_len, format_string *fs, int is_upper)
     return fs->width;
 }
 
+static unsigned long long int get_n(va_list *args, format_string *fs)
+{
+    unsigned long long int res = 0;
+
+    if (my_strlen(fs->len_mod) == 0)
+        return va_arg(*args, unsigned int);
+    if (my_strcmp(fs->len_mod, "h") == 0)
+        return (unsigned short int) va_arg(*args, int);
+    if (my_strcmp(fs->len_mod, "hh") == 0)
+        return (unsigned char) va_arg(*args, int);
+    if (my_strcmp(fs->len_mod, "l") == 0)
+        return va_arg(*args, unsigned long int);
+    if (my_strcmp(fs->len_mod, "ll") == 0)
+        return va_arg(*args, unsigned long long int);
+}
+
 static int handle_hex(va_list *args, format_string *fs, int is_upper)
 {
     int cnt = 0;
-    unsigned int n = va_arg(*args, unsigned int);
+    unsigned long long int n = get_n(args, fs);
 
     if (n == 0) {
         my_putchar('0');

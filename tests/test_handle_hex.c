@@ -68,3 +68,24 @@ Test (handle_hex, pointer_test, .init = cr_redirect_stdout)
     cr_assert_stdout_eq_str("0x7ffe02902388");
     cr_assert_eq(cnt, 14);
 }
+
+Test (handle_hex, handle_len_mod, .init = cr_redirect_stdout)
+{
+    int cnt = 0;
+    unsigned char n1 = 250;
+    unsigned short int n2 = -30000;
+    unsigned int n3 = 2000000000;
+    unsigned long int n4 = 2147483646;
+    unsigned long long int n5 = 9223372036854775800;
+
+    cnt += my_printf("%16hhx\n", n1);
+    cnt += my_printf("%16hx\n", n2);
+    cnt += my_printf("%16x\n", n3);
+    cnt += my_printf("%16lx\n", n4);
+    cnt += my_printf("%16llx\n", n5);
+
+    cr_assert_stdout_eq_str(
+	    "              fa\n            8ad0\n        77359400\n        7ffffffe\n7ffffffffffffff8\n"
+        );
+    cr_assert_eq (cnt, 85);
+}
