@@ -45,6 +45,7 @@ int my_getfloat_len(double nb, int precision)
     if (precision < 0)
         precision = 6;
     cnt += get_next_int((int) nb);
-    cnt += put_float(nb, precision);
+    if (precision != 0)
+        cnt += put_float(nb, precision);
     return cnt;
 }

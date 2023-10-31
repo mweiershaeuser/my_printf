@@ -25,3 +25,18 @@ Test (handle_float, precision_test, .init = cr_redirect_stdout)
     cr_assert_eq(cnt, 7);
 }
 
+Test (handle_float, flags_test, .init = cr_redirect_stdout)
+{
+    int cnt = 0;
+    float n = 42.7;
+
+    cnt += my_printf("% .3f\n", n);
+    cnt += my_printf("% 10.2f\n", n);
+    cnt += my_printf("% 010.2f\n", n);
+    cnt += my_printf("%+ -10f\n", n);
+    cnt += my_printf("%+ -010f\n", n);
+    cnt += my_printf("%+ 0-10.2f\n", n);
+    
+    cr_assert_stdout_eq_str(" 42.700\n     42.70\n 000042.70\n+42.700000\n+42.700000\n+42.70    \n");
+    cr_assert_eq(cnt, 63);
+}
