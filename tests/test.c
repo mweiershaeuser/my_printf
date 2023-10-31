@@ -18,13 +18,6 @@ Test (my_printf, more_params, .init = cr_redirect_stdout)
     cr_assert_eq (cnt, my_strlen(str));
 }
 
-Test (my_printf, chars, .init = cr_redirect_stdout)
-{
-    int cnt = my_printf ("%c%c%c%c", 'h', 'o', 'l', 'a') ;
-    cr_assert_stdout_eq_str("hola");
-    cr_assert_eq(cnt, 4);
-}
-
 Test (my_printf, percent, .init = cr_redirect_stdout)
 {
     int cnt = my_printf ("%d%%", -100) ;

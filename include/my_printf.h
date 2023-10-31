@@ -23,4 +23,6 @@ int handle_pointer(va_list *params, format_string *fs);
 int get_exp(double nb);
 int handle_scientific_not_lower(va_list *params, format_string *fs);
 int handle_scientific_not_upper(va_list *params, format_string *fs);
+int handle_g_lower(va_list *params, format_string *fs);
+int handle_g_upper(va_list *params, format_string *fs);
 #endif
