@@ -12,7 +12,18 @@
 
 int handle_g(va_list *params, format_string *fs, int upper)
 {
-    return 0;
+    double nb = va_arg(*params, double);
+    int exp = get_exp(nb);
+
+    if (exp < -4 || exp >= fs->precision) {
+        if (upper) {
+            return handle_scientific_not(nb, fs, 'E');
+        } else {
+            return handle_scientific_not(nb, fs, 'e');
+        }
+    } else {
+        return handle_float_inner(nb, fs);
+    }
 }
 
 int handle_g_lower(va_list *params, format_string *fs)

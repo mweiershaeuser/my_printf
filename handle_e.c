@@ -74,9 +74,8 @@ static int print_exp(int exp, char e)
     return count;
 }
 
-static int handle_scientific_not(va_list *params, format_string *fs, char e)
+int handle_scientific_not(double nb, format_string *fs, char e)
 {
-    double nb = va_arg(*params, double);
     int exp;
     int count = 0;
 
@@ -88,10 +87,14 @@ static int handle_scientific_not(va_list *params, format_string *fs, char e)
 
 int handle_scientific_not_lower(va_list *params, format_string *fs)
 {
-    return handle_scientific_not(params, fs, 'e');
+    double nb = va_arg(*params, double);
+
+    return handle_scientific_not(nb, fs, 'e');
 }
 
 int handle_scientific_not_upper(va_list *params, format_string *fs)
 {
-    return handle_scientific_not(params, fs, 'E');
+    double nb = va_arg(*params, double);
+
+    return handle_scientific_not(nb, fs, 'E');
 }

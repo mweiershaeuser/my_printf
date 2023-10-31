@@ -67,9 +67,8 @@ static int handle_width(long double n, int num_len,
     return fs->width;
 }
 
-int handle_float(va_list *args, format_string *fs)
+int handle_float_inner(long double n, format_string *fs)
 {
-    long double n = va_arg(*args, double);
     int num_len;
     int precision = fs->precision;
     char signal = get_signal(n, fs);
@@ -86,4 +85,11 @@ int handle_float(va_list *args, format_string *fs)
         return num_len;
     }
     return handle_width(n, num_len, fs, signal);
+}
+
+int handle_float(va_list *args, format_string *fs)
+{
+    long double n = va_arg(*args, double);
+
+    return handle_float_inner(n, fs);
 }
