@@ -47,6 +47,7 @@ SRC	=	lib/my/helpers.c	\
 		my_printf.c		\
 		basic_flags.c		\
 		handle_int.c		\
+		handle_float.c		\
 		handle_hex.c            \
 		change_base.c		\
 		handle_pointer.c		\
