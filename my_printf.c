@@ -14,14 +14,6 @@
 #include "include/len_mod.h"
 #include "include/conversion.h"
 
-static int handle_n_flag(va_list *args, int cnt)
-{
-    int *cur = va_arg(*args, int *);
-
-    *cur = cnt;
-    return 0;
-}
-
 static int handle_others(const char *format, va_list *args, int cnt)
 {
     switch (*format) {

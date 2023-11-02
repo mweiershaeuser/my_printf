@@ -26,6 +26,7 @@ int my_put_ll(long long int nb);
 int my_put_nbr(int nb);
 int my_putfloat(double nb, int precision);
 int my_putstr(char const *str);
+int my_putstr_precision(char const *str, int precision);
 char *my_revstr(char *str);
 int my_showmem(char const *str, int size);
 int my_showstr(char const *str);

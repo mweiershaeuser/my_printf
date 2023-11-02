@@ -21,6 +21,7 @@ SRC	=	lib/my/helpers.c	\
 		lib/my/my_put_nbr.c	\
 		lib/my/my_putfloat.c	\
 		lib/my/my_putstr.c	\
+		lib/my/my_putstr_precision.c      \
 		lib/my/my_revstr.c	\
 		lib/my/my_showmem.c	\
 		lib/my/my_showstr.c	\

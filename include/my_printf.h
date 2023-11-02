@@ -28,4 +28,5 @@ int handle_scientific_not_upper(va_list *params, format_string *fs);
 int handle_g_lower(va_list *params, format_string *fs);
 int handle_g_upper(va_list *params, format_string *fs);
 int handle_binary(va_list *params, format_string *fs);
+int handle_n_flag(va_list *args, int cnt);
 #endif
