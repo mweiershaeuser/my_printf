@@ -5,8 +5,8 @@
 ** Basic flags for My printf
 */
 #include <stdarg.h>
-#include "include/my.h"
-#include "include/format.h"
+#include "../include/my.h"
+#include "../include/format.h"
 
 static void put_chars(int n, char c)
 {
