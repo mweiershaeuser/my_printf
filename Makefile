@@ -49,7 +49,7 @@ SRC	=	lib/my/helpers.c	\
 		handle_int.c		\
 		handle_hex.c            \
 		change_base.c		\
-		p_flag.c		\
+		handle_pointer.c		\
 		handle_e.c		\
 		handle_c.c		\
 		handle_g.c

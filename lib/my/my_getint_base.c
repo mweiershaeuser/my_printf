@@ -43,6 +43,8 @@ static char *get_str(unsigned long long int nbr, char const *base)
 int my_getint_base(unsigned long long int nbr, char const *base)
 {
     char *str = get_str(nbr, base);
+    int len = my_putstr(str);
 
-    return my_putstr(str);
+    free(str);
+    return len;
 }
