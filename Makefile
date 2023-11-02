@@ -53,7 +53,8 @@ SRC	=	lib/my/helpers.c	\
 		handle_pointer.c		\
 		handle_e.c		\
 		handle_c.c		\
-		handle_g.c
+		handle_g.c		\
+		handle_binary.c
 
 OBJ	=	$(SRC:.c=.o)
 
