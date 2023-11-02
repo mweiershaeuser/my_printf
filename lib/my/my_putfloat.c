@@ -26,7 +26,6 @@ static double put_float(double nb, int precision)
     int cnt = 0;
     int rest = 0;
 
-    nb = nb - intpart;
     my_putchar('.');
     for (int i = 0; i < precision; i++) {
         nb = nb * 10;
