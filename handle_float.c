@@ -29,20 +29,21 @@ static void put_chars(int n, char c)
     }
 }
 
-static int put_float(long double n, int precision, char signal)
+static int put_float(long double n, int precision, char signal, int g_conv)
 {
     if (precision < 0)
-        return my_putfloat(n, 6);
+        return my_putfloat(n, 6, g_conv);
     if (precision == 0)
         return my_put_nbr(n);
-    return my_putfloat(n, precision);
+    return my_putfloat(n, precision, g_conv);
 }
 
 static int handle_width(long double n, int num_len,
-    format_string *fs, char signal)
+    format_string *fs, int g_conv)
 {
     char *right = my_strstr(fs->flags, "-");
     char *zero = my_strstr(fs->flags, "0");
+    char signal = get_signal(n, fs);
 
     if (right == 0 && zero == 0)
         put_chars(fs->width - num_len, ' ');
@@ -50,7 +51,7 @@ static int handle_width(long double n, int num_len,
         my_putchar(signal);
     if (right == 0 && zero != 0)
         put_chars(fs->width - num_len, '0');
-    put_float(n, fs->precision, signal);
+    put_float(n, fs->precision, signal, g_conv);
     if (right != 0)
         put_chars(fs->width - num_len, ' ');
     return fs->width;
@@ -65,7 +66,7 @@ static long double get_n(va_list *args, format_string *fs)
     return va_arg(*args, double);
 }
 
-int handle_float_inner(long double n, format_string *fs)
+int handle_float_inner(long double n, format_string *fs, int g_conv)
 {
     int num_len;
     int precision = fs->precision;
@@ -73,21 +74,21 @@ int handle_float_inner(long double n, format_string *fs)
 
     if (n < 0)
         n = n * (-1);
-    num_len = my_getfloat_len(n, precision);
+    num_len = my_getfloat_len(n, precision, g_conv);
     if (signal != 0)
         num_len += 1;
     if (num_len >= fs->width) {
         if (signal != 0)
             my_putchar(signal);
-        put_float(n, precision, signal);
+        put_float(n, precision, signal, g_conv);
         return num_len;
     }
-    return handle_width(n, num_len, fs, signal);
+    return handle_width(n, num_len, fs, g_conv);
 }
 
 int handle_float(va_list *args, format_string *fs)
 {
     long double n = get_n(args, fs);
 
-    return handle_float_inner(n, fs);
+    return handle_float_inner(n, fs, 0);
 }

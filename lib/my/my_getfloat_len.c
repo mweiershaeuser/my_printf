@@ -19,22 +19,25 @@ static long int get_next_int(long int nb)
     return cnt;
 }
 
-static double put_float(double nb, int precision)
+static double put_float(double nb, int precision, int g_conv)
 {
-    int intpart = (int) nb;
+    int intpart;
     int cnt = 0;
     int rest = 0;
 
-    nb = nb - intpart;
     for (int i = 0; i < precision; i++) {
         nb = nb * 10;
+        intpart = (int) nb;
         rest = (int) nb % 10;
         cnt++;
+        if ((nb - intpart) < 0.000000001 && g_conv) {
+            break;
+        }
     }
     return cnt + 1;
 }
 
-int my_getfloat_len(double nb, int precision)
+int my_getfloat_len(double nb, int precision, int g_conv)
 {
     int cnt = 0;
 
@@ -46,6 +49,6 @@ int my_getfloat_len(double nb, int precision)
         precision = 6;
     cnt += get_next_int((int) nb);
     if (precision != 0)
-        cnt += put_float(nb, precision);
+        cnt += put_float(nb, precision, g_conv);
     return cnt;
 }
