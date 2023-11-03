@@ -47,7 +47,7 @@ int handle_str(va_list *args, format_string *fs)
         len = fs->precision;
     if (len < fs->width)
         return handle_width(str, len, fs);
-    return my_putstr_precision(str, fs->precision);
+    return my_putstr_precision(str, len);
 }
 
 int handle_percent(va_list *args, format_string *fs)

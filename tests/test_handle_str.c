@@ -12,6 +12,15 @@ Test (handle_str, precision, .init = cr_redirect_stdout)
     cr_assert_eq(cnt, 7);
 }
 
+Test (handle_str, bigger_precision, .init = cr_redirect_stdout)
+{
+    char *str = "Shake";
+    int cnt = my_printf("%.10s", str);
+
+    cr_assert_stdout_eq_str("Shake");
+    cr_assert_eq(cnt, 5);
+}
+
 Test (handle_str, flags, .init = cr_redirect_stdout)
 {
     char *str = "Pasteis";
